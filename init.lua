@@ -175,10 +175,5 @@ hs.urlevent.bind(
       hs.execute("echo done >> ~/temp.txt && open ~/temp.txt")
 end)
 
-hs.urlevent.bind(
-   "devstuff", function(eventname, params)
-      openDevStuff()
-end)
-
 showAlert("Hammerspoon config reloaded")
 -- end
