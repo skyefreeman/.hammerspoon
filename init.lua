@@ -10,14 +10,12 @@ local defaultHotkeys = {"cmd", "alt", "ctrl"}
 
 -- Calculations
 
-local padding = 5
-
 function halfScreenRect(originX)
    local screen = screen()
    local x = originX
-   local y = screen.y + padding
-   local w = screen.w/2 - (padding * 1.5)
-   local h = screen.h - (padding * 2)
+   local y = screen.y
+   local w = screen.w/2
+   local h = screen.h
    return hs.geometry.rect(x,y,w,h)
 end
 
@@ -94,7 +92,7 @@ end)
 hs.hotkey.bind(
    defaultHotkeys, "Left", function()
       local screen = screen()
-      local x = screen.x + padding
+      local x = screen.x
       setFocusedWindowFrame(halfScreenRect(x))
 end)
 
@@ -102,8 +100,7 @@ hs.hotkey.bind(
    defaultHotkeys, "Right", function()
       local screen = screen()
       local middleX = screen.x + screen.w/2
-      local x = padding/2 + middleX
-      setFocusedWindowFrame(halfScreenRect(x))
+      setFocusedWindowFrame(halfScreenRect(middleX))
 end)
 
 hs.hotkey.bind(
