@@ -67,6 +67,18 @@ function setFocusedWindowFrame(rect)
    window:setFrame(f)
 end
 
+function windowRight ()
+   local screen = screen()           
+   local middleX = screen.x + screen.w/2
+   setFocusedWindowFrame(halfScreenRect(middleX))
+end
+
+function windowLeft ()
+   local screen = screen()
+   local x = screen.x
+   setFocusedWindowFrame(halfScreenRect(x))
+end
+
 -- Mouse Drawing
 
 function mouseHighlight()
@@ -91,21 +103,31 @@ end)
 
 hs.hotkey.bind(
    defaultHotkeys, "Left", function()
-      local screen = screen()
-      local x = screen.x
-      setFocusedWindowFrame(halfScreenRect(x))
+      windowLeft()
 end)
 
 hs.hotkey.bind(
    defaultHotkeys, "Right", function()
-      local screen = screen()
-      local middleX = screen.x + screen.w/2
-      setFocusedWindowFrame(halfScreenRect(middleX))
+      windowRight()
 end)
 
 hs.hotkey.bind(
    defaultHotkeys, "j", function()
       hs.grid.show()
+end)
+
+-- atreus specific
+
+hs.hotkey.bind(
+   {},"f1", function()
+      print("Right")
+      windowLeft()
+end)
+
+hs.hotkey.bind(
+   {},"f2", function()
+      print("Right")
+      windowRight()
 end)
 
 -- Pathwatchers
