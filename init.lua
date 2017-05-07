@@ -137,6 +137,11 @@ hs.hotkey.bind(
       windowMax()
 end)
 
+hs.hotkey.bind(
+   {}, "f4", function()
+      hs.execute("open /Applications/Emacs.app")
+end)
+
 -- Pathwatchers
 
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadHammerspoon):start()
