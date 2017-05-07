@@ -79,6 +79,12 @@ function windowLeft ()
    setFocusedWindowFrame(halfScreenRect(x))
 end
 
+function windowMax ()
+   local screen = screen()
+   local newRect = hs.geometry.rect(screen.x, screen.y, screen.w, screen.h)
+   setFocusedWindowFrame(newRect)
+end
+
 -- Mouse Drawing
 
 function mouseHighlight()
@@ -96,9 +102,7 @@ end
 
 hs.hotkey.bind(
    {"shift", "ctrl"}, "m", function()
-      local screen = screen()
-      local newRect = hs.geometry.rect(screen.x, screen.y, screen.w, screen.h)
-      setFocusedWindowFrame(newRect)
+
 end)
 
 hs.hotkey.bind(
@@ -120,14 +124,17 @@ end)
 
 hs.hotkey.bind(
    {},"f1", function()
-      print("Right")
       windowLeft()
 end)
 
 hs.hotkey.bind(
    {},"f2", function()
-      print("Right")
       windowRight()
+end)
+
+hs.hotkey.bind(
+   {},"f3", function()
+      windowMax()
 end)
 
 -- Pathwatchers
