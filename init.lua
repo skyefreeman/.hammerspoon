@@ -138,7 +138,7 @@ hs.hotkey.bind(
 end)
 
 hs.hotkey.bind(
-   {}, "f4", function()
+   {}, "f7", function()
       hs.execute("open /Applications/Emacs.app")
 end)
 
