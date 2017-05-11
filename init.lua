@@ -102,7 +102,7 @@ end
 
 hs.hotkey.bind(
    {"shift", "ctrl"}, "m", function()
-
+      windowMax()
 end)
 
 hs.hotkey.bind(
