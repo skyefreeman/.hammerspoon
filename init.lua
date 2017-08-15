@@ -85,6 +85,20 @@ function windowMax ()
    setFocusedWindowFrame(newRect)
 end
 
+-- Emacs
+
+function toggleEmacs ()
+   local window = hs.window.focusedWindow()
+   local application = window:application()
+   local focused = application:name() == "Emacs"
+   
+   if not focused then
+      hs.execute("open /Applications/Emacs.app")
+   else
+      application:hide()
+   end
+end
+
 -- Mouse Drawing
 
 function mouseHighlight()
@@ -120,6 +134,16 @@ hs.hotkey.bind(
       hs.grid.show()
 end)
 
+hs.hotkey.bind(
+   {}, "f7", function()
+      hs.execute("open /Applications/Emacs.app")
+end)
+
+hs.hotkey.bind(
+   {"cmd"}, "`", function()
+      toggleEmacs()
+end)
+
 -- atreus specific
 
 hs.hotkey.bind(
@@ -141,6 +165,7 @@ hs.hotkey.bind(
    {}, "f7", function()
       hs.execute("open /Applications/Emacs.app")
 end)
+
 
 -- Pathwatchers
 
