@@ -140,7 +140,7 @@ hs.hotkey.bind(
 end)
 
 hs.hotkey.bind(
-   {"cmd"}, "`", function()
+   {"ctrl"}, "`", function()
       toggleEmacs()
 end)
 
