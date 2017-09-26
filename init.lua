@@ -139,10 +139,10 @@ hs.hotkey.bind(
       hs.execute("open /Applications/Emacs.app")
 end)
 
--- hs.hotkey.bind(
-   -- {"ctrl"}, "`", function()
-      -- toggleEmacs()
--- end)
+hs.hotkey.bind(
+   {"alt"}, "`", function()
+      toggleEmacs()
+end)
 
 -- atreus specific
 
