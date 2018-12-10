@@ -94,6 +94,7 @@ function toggleEmacs ()
    
    if not focused then
       hs.execute("open /Applications/Emacs.app")
+      hs.timer.doAfter(1, function() windowLeft() end)
    else
       application:hide()
    end
