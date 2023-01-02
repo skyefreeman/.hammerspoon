@@ -10,12 +10,21 @@ local defaultHotkeys = {"cmd", "alt", "ctrl"}
 
 -- Calculations
 
-function halfScreenRect(originX)
+function horizontalHalfScreenRect(originX)
    local screen = screen()
    local x = originX
    local y = screen.y
    local w = screen.w/2
    local h = screen.h
+   return hs.geometry.rect(x,y,w,h)
+end
+
+function verticalHalfScreenRect(originY)
+   local screen = screen()
+   local x = screen.x
+   local y = originY
+   local w = screen.w
+   local h = screen.h/2
    return hs.geometry.rect(x,y,w,h)
 end
 
@@ -45,6 +54,14 @@ end
 
 -- Window Management
 
+function printAllWindows()
+   local windows = hs.window.allWindows()
+   print("Windows:")
+   for _,v in pairs(windows) do
+      print(v)
+   end
+end
+
 function screen()
    return hs.window.focusedWindow():screen():frame()
 end
@@ -70,18 +87,51 @@ end
 function windowRight ()
    local screen = screen()           
    local middleX = screen.x + screen.w/2
-   setFocusedWindowFrame(halfScreenRect(middleX))
+   setFocusedWindowFrame(horizontalHalfScreenRect(middleX))
 end
 
 function windowLeft ()
    local screen = screen()
    local x = screen.x
-   setFocusedWindowFrame(halfScreenRect(x))
+   setFocusedWindowFrame(horizontalHalfScreenRect(x))
+end
+
+function windowTop ()
+   local screen = screen()
+   local y = screen.y
+   setFocusedWindowFrame(verticalHalfScreenRect(y))
+end
+
+function windowBottom ()
+   local screen = screen()
+   local y = screen.y + screen.h/2
+   setFocusedWindowFrame(verticalHalfScreenRect(y))
 end
 
 function windowMax ()
    local screen = screen()
    local newRect = hs.geometry.rect(screen.x, screen.y, screen.w, screen.h)
+   setFocusedWindowFrame(newRect)
+end
+
+-- function verticalHalfScreenRect(originY)
+--    local screen = screen()
+--    local x = screen.x
+--    local y = originY
+--    local w = screen.w
+--    local h = screen.h/2
+--    return hs.geometry.rect(x,y,w,h)
+-- end
+function windowCenter ()
+   local screen = screen()
+   local width = 900
+   local height = 900
+   local newRect = hs.geometry.rect(
+      screen.x + screen.w/2 - width/2,
+      screen.y + screen.h/2 - height/2,
+      width,
+      height
+   )
    setFocusedWindowFrame(newRect)
 end
 
@@ -163,6 +213,21 @@ hs.hotkey.bind(
 end)
 
 hs.hotkey.bind(
+   {},"f4", function()
+      windowTop()
+end)
+
+hs.hotkey.bind(
+   {},"f5", function()
+      windowBottom()
+end)
+
+hs.hotkey.bind(
+   {},"f6", function()
+      windowCenter()
+end)
+
+hs.hotkey.bind(
    {}, "f7", function()
       hs.execute("open /Applications/Emacs.app")
 end)
@@ -170,7 +235,8 @@ end)
 
 -- Pathwatchers
 
-hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadHammerspoon):start()
+-- hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadHammerspoon):start()
+hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/init.lua", reloadHammerspoon):start()
 hs.pathwatcher.new(os.getenv("HOME") .. "/.bash_profile", function() hs.execute("source ~/.bash_profile") end):start()
 
 -- USB Events
